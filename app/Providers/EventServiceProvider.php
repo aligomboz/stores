@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\OrderEvent;
+use App\Listeners\SendOrderCreateEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +19,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        OrderEvent::class =>[
+            SendOrderCreateEmail::class,
+        ],
+        'App\Events\ProductCreated' =>[
+            'App\Listeners\UpdateCache', //في حال لوبدي انشاء الايفينت و اليسينير مع بعض 
         ],
     ];
 

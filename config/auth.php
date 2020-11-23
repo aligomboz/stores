@@ -46,6 +46,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'admin' =>[
+            'driver' =>'session', //admins الخطوة 2
+            'provider' =>'admins',
+        ]
     ],
 
     /*
@@ -71,10 +75,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'admins' => [
+             'driver' => 'eloquent',   //admins الخطوة 1
+             'model' => App\Admin::class,      
+         ],
     ],
 
     /*
@@ -99,6 +103,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -113,5 +123,5 @@ return [
     */
 
     'password_timeout' => 10800,
-
+    
 ];
